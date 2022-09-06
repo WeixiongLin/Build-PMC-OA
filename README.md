@@ -36,7 +36,9 @@ conda create -n pubmed python=3.8  # 不支持更低版本, 否则编码存在�
 conda activate pubmed
 
 pip install -r requirements.txt  # 安装依赖
-python setup.py develop  # 安装本项目
+
+git clone https://gitee.com/lin_wei_hung/build-pubmed.git
+python setup.py develop  # 安装本项目(开发者模式)
 ```
 
 
