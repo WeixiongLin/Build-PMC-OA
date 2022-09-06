@@ -1,14 +1,34 @@
 # BuildPubmed
 
+Collect data from Pubmed.
+
+- [BuildPubmed](#buildpubmed)
+  - [Build up ENV](#build-up-env)
+  - [Others](#others)
+      - [Description](#description)
+      - [Installation](#installation)
+      - [Instructions](#instructions)
+      - [Contribution](#contribution)
+      - [PMC Open Access Subset](#pmc-open-access-subset)
+
+## Build up ENV
+```bash
+conda create -n pubmed python=3.5
+conda activate pubmed
+
+python setup.py develop
+```
+
+
+## Others
+
 #### Description
 Collect data from Pubmed.
 
-#### Software Architecture
-Software architecture description
 
 #### Installation
 
-1.  xxxx
+1.  Built up ENV
 2.  xxxx
 3.  xxxx
 
@@ -25,12 +45,7 @@ Software architecture description
 3.  Commit your code
 4.  Create Pull Request
 
+#### PMC Open Access Subset
+PMC is not available for bulk download due to licence restrictions. Only a subset of PMC is open to public.
 
-#### Gitee Feature
-
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+[Download Page](https://www.ncbi.nlm.nih.gov/pmc/tools/ftp/)
