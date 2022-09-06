@@ -3,7 +3,7 @@
 import argparse
 import multiprocessing
 import os
-import tempfile
+
 
 def parse_args_oa():
     parser = argparse.ArgumentParser(
@@ -19,7 +19,7 @@ def parse_args_oa():
         '-e', '--extraction-dir',
         help='path to the directory where downloaded archives and '
              + 'images are extracted before being moved to the data subdirectory',
-        default=os.path.join(tempfile.tempdir, 'PMC_OA'),
+        default=os.path.join('./', 'PMC_OA'),
     )
     parser.add_argument(
         '-d', '--delete-extraction-dir',

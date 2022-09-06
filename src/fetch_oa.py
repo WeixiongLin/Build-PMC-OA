@@ -1,5 +1,4 @@
 '''Fetch catelogue from PMC Open Access Subset
-python src/fetch_oa.py --extraction-dir /remote-home/weixionglin/build-pubmed/PMC_OA
 python src/fetch_oa.py --extraction-dir /remote-home/share/medical/public/PMC_OA
 '''
 import glob
@@ -20,8 +19,6 @@ logger.addHandler(console_handler)
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - \33[32m%(message)s\033[0m')
 console_handler.setFormatter(formatter)
 
-import tempfile
-tempfile.gettempdir()
 
 from data import OA_LINKS  # file links of PMC Open Access
 from args import parse_args_oa
