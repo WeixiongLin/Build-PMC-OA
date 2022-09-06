@@ -17,7 +17,7 @@ def get_img_url(PMC_ID, graphic):
     img_url = 'https://www.ncbi.nlm.nih.gov/pmc/articles/%s/bin/%s.jpg' % (PMC_ID, graphic)
     return img_url
 
-def get_mov_url(PMC_ID, media):
+def get_video_url(PMC_ID, media):
     mov_url = 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC317275/bin/%s' % media
     return mov_url
 
@@ -46,11 +46,18 @@ def parse_xml(xml_path):
         if fig.graphic:
             graphic = fig.graphic.attrs['xlink:href']
             media_url = get_img_url(PMC_ID, graphic)
+            file_extension = media_url.split('.')[-1]  # .jpg
+            media_name = f'{PMC_ID}_{media_id}.jpg'  # xml gives no file extension for image, so assign .jpg manually
         elif fig.media:
             media = fig.media.attrs['xlink:href']
-            media_url = get_mov_url(PMC_ID, media)
+            media_url = get_video_url(PMC_ID, media)
+            file_extension = media_url.split('.')[-1]  # .mov .dcr .avi
+            media_name = f'{PMC_ID}_{media_id}.{file_extension}'
         else:
-            raise ValueError(f'error occurs when parsing xml figs: {xml_path}')
+            raise RuntimeError(f'error occurs when parsing xml figs: {xml_path}')
+
+        if file_extension not in ['mov', 'jpg', 'dcr', 'avi', 'mpeg']:
+            raise RuntimeError(f'{xml_path} contains media we dont know before: {media_name}, {media_url}')
 
         # not all figs have captions, check PMC212690 as an example: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC212690/
         if not fig.caption:
@@ -60,9 +67,10 @@ def parse_xml(xml_path):
 
         item_info.append({
             'PMC_ID': PMC_ID,
-            'media_id': media_id,  # media_id could represent image or video. [image: pbio.0020008.g002; video: pbio-0020008-v001]
+            'media_id': media_id,  # media_id could represent image or video. [image: pbio-0020008-g002; video: pbio-0020008-v001]
             'caption': caption,
-            'media_url': media_url
+            'media_url': media_url,
+            'media_name': media_name
         })
 
     return item_info
@@ -85,7 +93,7 @@ def get_volume_info(volumes, extraction_dir: pathlib.Path):
 
         df = pd.read_csv(file_path, sep=',')
 
-        for idx in tqdm(range(len(df))):
+        for idx in tqdm(range(len(df)), desc='parse xml'):
             xml_path = extraction_dir / volume / df.loc[idx, 'Article File']
             item_info = parse_xml(xml_path)
             info += item_info

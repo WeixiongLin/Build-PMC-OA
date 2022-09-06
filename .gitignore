@@ -1,5 +1,7 @@
 # Dataset files
 *.csv
+*.tar.gz
+*.xml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

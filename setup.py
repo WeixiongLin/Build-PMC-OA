@@ -30,8 +30,6 @@ setup(
         'Intended Audience :: Education',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: Apache Software License',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
@@ -49,11 +47,11 @@ setup(
     packages=find_packages(where='src', exclude=['training']),
     include_package_data=True,
     install_requires=[
-        'torch >= 1.9',
-        'torchvision',
-        'ftfy',
-        'regex',
+        'pandas>=1.1.3',
+        'beautifulsoup4',
+        'lxml',
         'tqdm',
+        'jsonlines'
     ],
-    python_requires='>=3.5',
+    python_requires='>=3.7',
 )
