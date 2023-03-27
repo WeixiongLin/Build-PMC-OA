@@ -1,72 +1,75 @@
-# BuildPubmed
+# Build PMC-OA
 
-Collect data from Pubmed.
+[中文版本](./README.md)
 
-- [BuildPubmed](#buildpubmed)
-  - [Build up ENV](#build-up-env)
-    - [Conda](#conda)
-    - [Dependency](#dependency)
-  - [Others](#others)
-      - [Description](#description)
-      - [Installation](#installation)
-      - [Instructions](#instructions)
-      - [Contribution](#contribution)
-      - [PMC Open Access Subset](#pmc-open-access-subset)
+This is our pipeline for the development of PMC-OA.
+You might need further adaptation to use it for your own purpose.
 
-## Build up ENV
+- [Build PMC-OA](#build-pmc-oa)
+  - [Installation](#installation)
+  - [About PMC-OA](#about-pmc-oa)
+  - [Structure](#structure)
+  - [Contribution](#contribution)
+  - [Limitation](#limitation)
+  - [Cite](#cite)
 
-### Conda
+## Installation
+
+1. Setup ENV
 ```bash
-conda create -n pubmed python=3.8  # 不支持更低版本, 编码存在问题
+conda create -n pubmed python=3.8  # not test for other version
 conda activate pubmed
 
-python setup.py develop
-```
-
-### Dependency
-```bash
 pip install -r requirements.txt
+
+git clone https://gitee.com/lin_wei_hung/build-pmcoa.git
+python setup.py develop  # choose developer mode for customization
 ```
-- pandas >= 1.1.3
-- beautifulsoup4
-- lxml
-- tqdm
-- jsonlines
 
-## Others
+2. Run the script
 
-#### Description
-Collect data from Pubmed.
+```bash
+python src/fetch_oa.py --volumes 0 1 2 3 4 5 6 7 8 9  # 10 volumes for PMC OA in total
+python src/fetch_oa.py --volumes 0 1 2  # Choose volumes of 0,1,2 only
+```
 
+## About PMC-OA
+PMC-OA(Pubmed Open Acess Subset) is built with public papers in Pubmed, which can be downloaded from [pubmed page](https://www.ncbi.nlm.nih.gov/pmc/tools/ftp/).
 
-#### Installation
+Due to the issue of copyright, the papers with Non-Commertial-Use liscence and ones with no liscence is not included in PMC-OA.
+You might customize the repo for your own purpose.
 
-1.  Built up ENV
-2.  Install dependencies
-3.  xxxx
+## Structure
+```
+setup.py
+src/
+  |--fetch_oa.py: main script for download PMC-OA
+  |--args/
+  | |--args_oa.py: Configures for pipeline
+  |--parser/
+  | |--parse_oa.py: Parse web pages into list of <img, caption> pairs
+  |--utils/
+  | |--io.py: 
+```
 
-#### Instructions
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Contribution
+## Contribution
 
 1.  Fork the repository
 2.  Create Feat_xxx branch
 3.  Commit your code
 4.  Create Pull Request
 
-#### PMC Open Access Subset
-PMC is not available for bulk download due to licence restrictions. Only a subset of PMC is open to public.
+## Limitation
+1. Some of the paper are only presented in pdf formart, the figures in those would not be obtained by this pipeline
+2. Media files other than images might also be downloaded, such as suffix .mp4, .avi.
 
-[Download Page](https://www.ncbi.nlm.nih.gov/pmc/tools/ftp/)
+## Cite
 
 ```bash
-# ROCO API
-# https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?tool=roco-fetch&email=johannes.rueckert@fh-dortmund.de&id=PMC4608653
-# wget -Uri ftp://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_package/8d/34/PMC4608653.tar.gz -OutFile E:\Dataset
-
-wget https://www.ncbi.nlm.nih.gov/pmc/articles/PMC555952/bin/1468-6708-6-4-2.jpg -OutFile E:\Dataset
+@article{lin2023pmc,
+  title={PMC-CLIP: Contrastive Language-Image Pre-training using Biomedical Documents},
+  author={Lin, Weixiong and Zhao, Ziheng and Zhang, Xiaoman and Wu, Chaoyi and Zhang, Ya and Wang, Yanfeng and Xie, Weidi},
+  journal={arXiv preprint arXiv:2303.07240},
+  year={2023}
+}
 ```
