@@ -18,7 +18,7 @@ def get_img_url(PMC_ID, graphic):
     return img_url
 
 def get_video_url(PMC_ID, media):
-    mov_url = 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC317275/bin/%s' % media
+    mov_url = 'https://www.ncbi.nlm.nih.gov/pmc/articles/%s/bin/%s' % (PMC_ID, media)
     return mov_url
 
 def parse_xml(xml_path):
@@ -99,23 +99,15 @@ def get_volume_info(volumes, extraction_dir: pathlib.Path):
             info += item_info
     return info
 
-def test_parse_xml():
-    print('Test for \033[32mparse_xml()\033[0m')
-    print('=============================================================')
-    item_info = parse_xml(xml_path='/remote-home/weixionglin/build-pubmed/PMC_OA/PMC000xxxxxx/PMC000xxxxxx/PMC176545.xml')
-    print(item_info[0].keys())
-    print('=============================================================')
-
 if __name__ == '__main__':
     print('\033[32mParse PMC documents\033[0m')
-    # test_parse_xml()
 
     volume_info = get_volume_info(
         volumes=[0],
-        extraction_dir=pathlib.Path('/remote-home/weixionglin/build-pubmed/PMC_OA')
+        extraction_dir=pathlib.Path('./PMC_OA')
     )
     print(f'Num of figs in volumes: {len(volume_info)}')
     write_jsonl(
         data_list=volume_info,
-        save_path='//remote-home/weixionglin/build-pubmed/volume0.jsonl'
+        save_path='./volume0.jsonl'
     )
