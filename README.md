@@ -1,6 +1,6 @@
 # Build PMC-OA
 
-[中文版本](./README.md)
+[中文版本](./README.zh.md)
 
 This is our pipeline for the development of PMC-OA.
 You might need further adaptation to use it for your own purpose.
