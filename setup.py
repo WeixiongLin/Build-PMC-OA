@@ -43,6 +43,9 @@ setup(
 
     # Note that this is a string of words separated by whitespace, not a list.
     keywords='PubMed Dataset',
+    scripts = [
+        'src/fetch_oa.py'
+    ],
     package_dir={'': 'src'},
     packages=find_packages(where='src', exclude=['training']),
     include_package_data=True,

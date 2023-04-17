@@ -1,11 +1,11 @@
 '''File list for PMC OA: [csv, txt, tar]
 '''
 
-
+UPDATE_SCHEDULE = '2023-02-08'
 volume = 'PMC00%dxxxxxx'
-csv_url = 'https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_bulk/oa_comm/xml/oa_comm_xml.PMC00%dxxxxxx.baseline.2022-09-03.filelist.csv'
-txt_url = 'https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_bulk/oa_comm/xml/oa_comm_xml.PMC00%dxxxxxx.baseline.2022-09-03.filelist.txt'
-tar_url = 'https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_bulk/oa_comm/xml/oa_comm_xml.PMC00%dxxxxxx.baseline.2022-09-03.tar.gz'
+csv_url = f'https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_bulk/oa_comm/xml/oa_comm_xml.PMC00%dxxxxxx.baseline.{UPDATE_SCHEDULE}.filelist.csv'
+txt_url = f'https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_bulk/oa_comm/xml/oa_comm_xml.PMC00%dxxxxxx.baseline.{UPDATE_SCHEDULE}.filelist.txt'
+tar_url = f'https://ftp.ncbi.nlm.nih.gov/pub/pmc/oa_bulk/oa_comm/xml/oa_comm_xml.PMC00%dxxxxxx.baseline.{UPDATE_SCHEDULE}.tar.gz'
 
 OA_LINKS = {}
 

@@ -78,7 +78,7 @@ def download_archive(volumes, extract=True):
             logger.info('%s already exists', volume)
     # end for
 
-def dowload_media(volume_info):
+def download_media(volume_info):
     '''
     volume_info:
         media_url
@@ -96,7 +96,10 @@ def dowload_media(volume_info):
         file_path = f'{figures_dir}/{media_name}'
 
         # BUG connection issues could result in nothing downloaded
-        subprocess.call(['wget', '-nc', '-nd', '-c', '-q', '-P', file_path, media_url])
+        # BUG wget results in 403 forbidden
+        subprocess.call(['wget', '-U', 
+                        'Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0',
+                        '-nc', '-nd', '-c', '-q', '-P', file_path, media_url])
         if not os.path.exists(file_path):
             raise RuntimeError('download failed, use the following command to check connection: wget https://www.ncbi.nlm.nih.gov/pmc/articles/PMC539052/bin/pmed.0010066.t003.jpg')
 
@@ -131,5 +134,5 @@ if __name__ == '__main__':
         volume_info = read_jsonl(file_path=volume_info_path)
 
 
-    dowload_media(volume_info)
+    download_media(volume_info)
     logger.info('Done')
